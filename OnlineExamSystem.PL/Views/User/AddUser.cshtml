@@ -1,0 +1,17 @@
+﻿@model AddUpdateUserViewModel
+@{
+    ViewData["Title"] = "AddUser";
+    ViewBag.Action = "AddUser";
+}
+
+<div class="row justify-content-center align-items-center flex-column">
+
+    <h1 class="text-center">Add New User</h1>
+
+    <partial name="Partial/AddAndUpdateUserPartialView" />
+
+</div>
+
+@section ValidationScriptSection {
+    <partial name="_ValidationScriptsPartial" />
+}

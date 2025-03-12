@@ -1,0 +1,63 @@
+﻿@model ExamQuestionViewModel
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="my-3 justify-content-center" >@Model.Exam.Title</h1>
+
+<ul class="nav nav-tabs" id="departmentTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="general-tab" data-bs-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">
+            Number Of Questions = @Model.Questions.Count
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    <!-- General Tab Content -->
+    <div class="tab-pane fade show active p-4 border" id="general" role="tabpanel" aria-labelledby="general">
+        <div class="row">
+            <!-- Question Fields -->
+            @for (int i = 0; i < Model.Questions.Count; i++)
+            {
+                <div class="col-12 form-group mb-3 mt-5">
+                    <div class="form-floating">
+                        <textarea asp-for="Questions[i].Title" class="form-control" placeholder="Leave a comment here" id="floatingTextarea" readonly></textarea>
+                        <label asp-for="Questions[i].Title" for="floatingTextarea"></label>
+                    </div>
+                </div>
+
+                <div class="col-6 form-group mb-3">
+                    <label class="col-form-label" asp-for="Questions[i].Choice1"></label>
+                    <input asp-for="Questions[i].Choice1" class="form-control" readonly />
+                </div>
+
+                <div class="col-6 form-group mb-3">
+                    <label class="col-form-label" asp-for="Questions[i].Choice2"></label>
+                    <input asp-for="Questions[i].Choice2" class="form-control" readonly />
+                </div>
+
+                <div class="col-6 form-group mb-3">
+                    <label class="col-form-label" asp-for="Questions[i].Choice3"></label>
+                    <input asp-for="Questions[i].Choice3" class="form-control" readonly />
+                </div>
+
+                <div class="col-6 form-group mb-3">
+                    <label class="col-form-label" asp-for="Questions[i].Choice4"></label>
+                    <input asp-for="Questions[i].Choice4" class="form-control" readonly />
+                </div>
+
+                <div class="col-12 form-group mb-5">
+                    <label class="col-form-label" asp-for="Questions[i].CorrectAnswer"></label>
+                    <input asp-for="Questions[i].CorrectAnswer" class="form-control" readonly />
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Edit" asp-route-id="@Model.Exam.Id" class="btn btn-success">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary">Back To List</a>
+    </div>
+</div>

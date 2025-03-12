@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "ExamResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var CorrectAnswers = ViewBag.CorrectAnswers;
+    var TotalQuestions = ViewBag.TotalQuestions;
+}
+@{
+    string state;
+    double Score = (CorrectAnswers / TotalQuestions) * 100;
+    if (Score >= 60)
+        state = "Passed The Exam";
+    else
+        state = "Faild, Try Again";
+}
+
+<div class="card text-center my-5">
+    <div class="card-header ">
+        <h2>Exam Result</h2>
+    </div>
+    <div class="card-body">
+        <h3 class="card-title my-5">Score: @Score</h3>
+        <h5 class="card-text my-5">State: @state</h5>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-success  p-2">Go To Home</a>
+    </div>
+</div>

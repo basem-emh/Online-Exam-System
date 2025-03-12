@@ -1,0 +1,116 @@
+﻿@model ExamQuestionViewModel
+@{
+    ViewData["Title"] = "TakeExam";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="my-3 justify-content-center">@Model.Exam.Title</h1>
+
+<ul class="nav nav-tabs" id="departmentTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="general-tab" data-bs-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">
+            Number Of Questions = @Model.Questions.Count
+        </a>
+    </li>
+</ul>
+
+<form asp-action="SubmitExam" method="post">
+    <div class="tab-content" id="myTabContent">
+        <!-- General Tab Content -->
+        <div class="tab-pane fade show active p-4 border" id="general" role="tabpanel" aria-labelledby="general">
+            <div class="row">
+                <!-- Question Fields -->
+                @for (int i = 0; i < Model.Questions.Count; i++)
+                {
+                    <div class="col-12 form-group mb-3 mt-5">
+                        <div class="form-floating">
+                            <textarea asp-for="Questions[i].Title" class="form-control" 
+                                      placeholder="Leave a comment here" 
+                                      id="floatingTextarea_@i" readonly>
+                            </textarea>
+                            <label asp-for="Questions[i].Title" for="floatingTextarea_@i">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 form-group mb-3">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" 
+                                   id="choice1_@i" name="Questions[@i].SelectedChoices" 
+                                   value="@Model.Questions[i].Choice1" 
+                            />
+                            <label class="form-check-label" for="choice1_@i">
+                                @Model.Questions[i].Choice1
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 form-group mb-3">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" 
+                                   id="choice2_@i" name="Questions[@i].SelectedChoices" 
+                                   value="@Model.Questions[i].Choice2" 
+                            />
+                            <label class="form-check-label" 
+                                   for="choice2_@i">@Model.Questions[i].Choice2
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 form-group mb-3">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" 
+                                   id="choice3_@i" name="Questions[@i].SelectedChoices" 
+                                   value="@Model.Questions[i].Choice3" 
+                            />
+                            <label class="form-check-label" for="choice3_@i">
+                                @Model.Questions[i].Choice3
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 form-group mb-3">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" 
+                                   id="choice4_@i" name="Questions[@i].SelectedChoices" 
+                                   value="@Model.Questions[i].Choice4" 
+                             />
+                            <label class="form-check-label" for="choice4_@i">
+                                @Model.Questions[i].Choice4
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 form-group mb-5">
+                        <input hidden asp-for="Questions[i].CorrectAnswer" 
+                               class="form-control" readonly />
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <input type="hidden" asp-for="Exam.Id" />
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    const questionId = this.name;
+                    const group = document.querySelectorAll(`input[name="${questionId}"]`);
+                    group.forEach(cb => {
+                        if (cb !== this) {
+                            cb.checked = false;
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+}

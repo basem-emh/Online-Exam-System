@@ -1,0 +1,79 @@
+﻿@model ExamQuestionViewModel
+
+<form asp-action="@ViewBag.Action" class="col-6">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <!-- Exam Fields -->
+    <div class="form-group mb-3">
+        <label class="col-form-label" asp-for="Exam.Title"></label>
+        <input asp-for="Exam.Title" class="form-control" />
+        <span asp-validation-for="Exam.Title" class="text-danger"></span>
+    </div>
+
+    <!-- Question Fields -->
+    @for (int i = 0; i < Model.Questions.Count; i++)
+    {
+        <div class="mb-5 mt-3 border border-light bg-light p-5">
+            <input type="hidden" asp-for="Questions[i].Id" />
+            <div class="form-group mb-3">
+                <div class="form-floating">
+                    <textarea asp-for="Questions[i].Title" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                    <label asp-for="Questions[i].Title" for="floatingTextarea"></label>
+                    <span asp-validation-for="Questions[i].Title" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="col-form-label" asp-for="Questions[i].Choice1"></label>
+                <input asp-for="Questions[i].Choice1" class="form-control" />
+                <span asp-validation-for="Questions[i].Choice1" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="col-form-label" asp-for="Questions[i].Choice2"></label>
+                <input asp-for="Questions[i].Choice2" class="form-control" />
+                <span asp-validation-for="Questions[i].Choice2" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="col-form-label" asp-for="Questions[i].Choice3"></label>
+                <input asp-for="Questions[i].Choice3" class="form-control" />
+                <span asp-validation-for="Questions[i].Choice3" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="col-form-label" asp-for="Questions[i].Choice4"></label>
+                <input asp-for="Questions[i].Choice4" class="form-control" />
+                <span asp-validation-for="Questions[i].Choice4" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="col-form-label" asp-for="Questions[i].CorrectAnswer"></label>
+                <input asp-for="Questions[i].CorrectAnswer" class="form-control" />
+                <span asp-validation-for="Questions[i].CorrectAnswer" class="text-danger"></span>
+            </div>
+       </div>
+    }
+
+    @if (ViewBag.Action == "Create")
+    {
+        <div class="mt-4">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-light">Back To List</a>
+        </div>
+    }
+    else if (ViewBag.Action == "AddQuestionToExam")
+    {
+        <div class="mt-4">
+            <input type="submit" value="Add" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-light">Back To List</a>
+        </div>
+    }
+    else
+    {
+        <div class="mt-4">
+            <input type="submit" value="Save" class="btn btn-success" />
+            <a asp-action="Index" class="btn btn-light">Cancel</a>
+        </div>
+    }
+</form>

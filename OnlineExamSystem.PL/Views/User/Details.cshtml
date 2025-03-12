@@ -1,0 +1,75 @@
+﻿@model UserDetailsDto
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="text-center"> @Model.FirstName Details</h1>
+<br />
+<br />
+<!-- Bootstrap Tabs -->
+<ul class="nav nav-tabs" id="userTabs" role="tablist">
+
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="general-tab" data-bs-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">
+            General
+        </a>
+    </li>
+
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="administration-tab" data-bs-toggle="tab" href="#administration" role="tab" aria-controls="administration" aria-selected="false">
+            Administration
+        </a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <!-- General Tab Content -->
+    <div class="tab-pane fade show active p-4 border" id="general" role="tabpanel" aria-labelledby="general">
+        <div class="row">
+            <!-- Id -->
+            <div class="form-group col-12">
+                <label class="col-form-label" asp-for="Id"></label>
+                <input asp-for="Id" class="form-control" readonly />
+            </div>
+            <!-- Name -->
+            <div class="form-group col-6">
+                <label class="col-form-label" asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" readonly />
+            </div>
+            <div class="form-group col-6">
+                <label class="col-form-label" asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" readonly />
+            </div>
+            <!-- Email -->
+            <div class="form-group col-12">
+                <label class="col-form-label" asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" readonly />
+            </div>
+            <!-- Phone -->
+            <div class="form-group col-12">
+                <label class="col-form-label" asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" readonly />
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade p-4 border" id="administration" role="tabpanel" aria-labelledby="administration">
+        <div class="form-group col-6">
+            <label class="col-form-label" asp-for="AddedAt"></label>
+            <input asp-for="AddedAt" class="form-control" readonly />
+        </div>
+
+        <div class="form-group col-6">
+            <label class="col-form-label" asp-for="Roles"></label>
+            <input asp-for="Roles" class="form-control" readonly />
+        </div>
+
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+        <a asp-controller="User" asp-action="Index" class="btn btn-outline-warning">Back To list </a>
+
+    </div>
+</div>
+
